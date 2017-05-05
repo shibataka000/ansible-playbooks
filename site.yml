@@ -1,0 +1,11 @@
+- hosts: all
+  become: yes
+  pre_tasks:
+    - name: Get terraform versions
+      get_url: url=https://releases.hashicorp.com/terraform/ dest=/tmp/terraform.html
+    - name: Get latest terraform version
+      shell: "cat /tmp/terraform.html | awk 'match($0, /terraform_[0-9.]+/) {print substr($0, RSTART+10, RLENGTH-10)}' | head -n 1"
+      register: terraform_latest_version
+      changed_when: False
+  roles:
+    - { role: azavea.terraform, terraform_version: "{{ terraform_latest_version.stdout }}" }
