@@ -11,8 +11,8 @@ Install following tools.
 - Ansible
 
 ## Usage
+1. Edit [hosts](./hosts).
 1. `ansible-playbook -i hosts site.yml`
-	- If remote machine is localhost and sshd is not installed, add `--connection=local`.
 
 ## Install
 1. `ansible-galaxy install -r requirements.yml`
