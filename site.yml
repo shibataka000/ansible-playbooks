@@ -5,3 +5,4 @@
     - docker_compose
     - docker_machine
     - terraform
+    - openjdk8
