@@ -9,3 +9,4 @@
       set_fact: terraform_latest_version="{{ terraform_release.tag_name | regex_replace('v', '') }}"
   roles:
     - { role: azavea.terraform, terraform_version: "{{ terraform_latest_version }}" }
+    - docker

@@ -1,0 +1,15 @@
+---
+- name: "Add GPG key"
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+- name: "Get \"lsb_release -cs\""
+  shell: "lsb_release -cs"
+  register: lsb_release
+  changed_when: false
+- name: "Add repository"
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
+- name: "Install docker"
+  apt:
+    name: docker-ce
+    update_cache: yes
