@@ -1,0 +1,19 @@
+---
+- name: "Install jq"
+  apt:
+    name: jq
+- name: "Get latest release info from GitHub"
+  get_url:
+    url: https://api.github.com/repos/docker/machine/releases/latest
+    dest: /tmp/docker_machine.json
+    force: yes
+- name: "Get latest version"
+  shell: "cat /tmp/docker_machine.json | jq -r .tag_name"
+  register: latest_version
+  changed_when: false
+- name: "Download docker-machine"
+  get_url:
+    url: https://github.com/docker/machine/releases/download/{{ latest_version.stdout }}/docker-machine-Linux-x86_64
+    dest: /usr/local/bin/docker-machine
+    mode: 0775
+    force: yes
