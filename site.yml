@@ -1,12 +1,5 @@
 - hosts: all
   become: yes
-  pre_tasks:
-    - name: Get terraform release info from GitHub
-      get_url: url=https://api.github.com/repos/hashicorp/terraform/releases/latest dest=/tmp/terraform.json
-    - name: Lookup terraform release info
-      set_fact: terraform_release="{{ lookup('file', '/tmp/terraform.json') | from_json }}"
-    - name: Set terraform latest version
-      set_fact: terraform_latest_version="{{ terraform_release.tag_name | regex_replace('v', '') }}"
   roles:
-    - { role: azavea.terraform, terraform_version: "{{ terraform_latest_version }}" }
     - docker
+    - terraform
