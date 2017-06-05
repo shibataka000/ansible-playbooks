@@ -6,3 +6,4 @@
     - docker_machine
     - terraform
     - openjdk8
+    - sbt
