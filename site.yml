@@ -7,3 +7,4 @@
     - terraform
     - openjdk8
     - sbt
+    - pyenv
