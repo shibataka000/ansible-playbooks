@@ -8,3 +8,4 @@
     - openjdk8
     - sbt
     - pyenv
+    - virtualenv
