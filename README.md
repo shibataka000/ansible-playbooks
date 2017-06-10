@@ -11,6 +11,8 @@ Install following tools.
 - [terraform](https://www.terraform.io/)
 - opejndk8
 - [sbt](http://www.scala-sbt.org/)
+- [pyenv](https://github.com/pyenv/pyenv)
+- [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
 
 ## Requirement
 - Ansible
