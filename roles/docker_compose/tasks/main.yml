@@ -7,6 +7,7 @@
     url: https://api.github.com/repos/docker/compose/releases/latest
     dest: /tmp/docker_compose.json
     force: yes
+  register: release
 - name: "Get latest version"
   shell: "cat /tmp/docker_compose.json | jq -r .tag_name"
   register: latest_version
@@ -17,3 +18,4 @@
     dest: /usr/local/bin/docker-compose
     mode: 0775
     force: yes
+  when: release.changed
