@@ -19,3 +19,4 @@
     mode: 0775
     force: yes
   when: release.changed
+  changed_when: true
