@@ -11,7 +11,7 @@
 - name: "Get latest version"
   shell: "cat /tmp/docker_compose.json | jq -r .tag_name"
   register: latest_version
-  changed_when: false
+  changed_when: release.changed
 - name: "Download docker-compose"
   get_url:
     url: https://github.com/docker/compose/releases/download/{{ latest_version.stdout }}/docker-compose-Linux-x86_64
