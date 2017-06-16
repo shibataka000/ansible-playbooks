@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+dist: "trusty"
+install:
+  - "sudo pip install ansible"
+  - "sudo pip install urllib3 pyOpenSSL ndg-httpsclient pyasn1"
+script:
+  - "sudo ansible-playbook -i hosts site.yml"
+  - "docker version"
+  - "docker-compose version"
+  - "docker-machine version"
+  - "terraform version"
+  - "sbt sbt-version"
+  - "pyenv --version"
+  - "pyenv virtualenv --version"
+notifications:
+  email: false
