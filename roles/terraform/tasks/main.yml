@@ -10,22 +10,16 @@
     url: https://api.github.com/repos/hashicorp/terraform/releases/latest
     dest: /tmp/terraform.json
     force: yes
-  register: release
 - name: "Get latest version"
   shell: "cat /tmp/terraform.json | jq -r .tag_name | sed -e 's/v//g'"
   register: latest_version
-  changed_when: release.changed
 - name: "Download terraform"
   get_url:
     url: https://releases.hashicorp.com/terraform/{{ latest_version.stdout }}/terraform_{{ latest_version.stdout }}_linux_amd64.zip
     dest: /tmp/terraform.zip
     force: yes
-  when: release.changed
-  changed_when: release.changed
 - name: "Unarchive terraform"
   unarchive:
     src: /tmp/terraform.zip
     dest: /usr/local/bin
     remote_src: yes
-  when: release.changed
-  changed_when: release.changed

@@ -5,7 +5,6 @@
 - name: "Get \"lsb_release -cs\""
   shell: "lsb_release -cs"
   register: lsb_release
-  changed_when: false
 - name: "Add repository"
   apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
