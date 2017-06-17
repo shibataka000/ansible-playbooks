@@ -48,10 +48,11 @@
 
 # pyenv and pyenv-virtualenv
 - name: "Run 'pyenv version' and 'pyenv virtualenv --version'"
+  become: false
   shell: |
-    export PATH="$HOME/.pyenv/bin:$PATH" && \
-    eval "$(pyenv init -)" && \
-    eval "$(pyenv virtualenv-init -)" && \
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
     pyenv --version
     pyenv virtualenv --version
   register: output
