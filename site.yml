@@ -9,4 +9,5 @@
     - sbt
     - pyenv
     - pyenv_virtualenv
+    - golang
     - assert_all_roles_installed

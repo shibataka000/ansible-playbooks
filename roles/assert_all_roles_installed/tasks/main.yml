@@ -59,3 +59,11 @@
 - name: "Result"
   debug:
     msg: "{{ output }}"
+
+# golang
+- name: "Run 'go version'"
+  shell: "/usr/local/go/bin/go version"
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"
