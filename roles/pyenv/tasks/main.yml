@@ -6,4 +6,4 @@
   become: false
   git:
     repo: "https://github.com/pyenv/pyenv.git"
-    dest: "~/.pyenv"
+    dest: "{{ lookup('env', 'HOME')}}/.pyenv"
