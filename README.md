@@ -21,7 +21,7 @@ Install following tools.
 
 ## Usage
 1. Edit [hosts](./hosts).
-1. `ansible-playbook -i hosts site.yml`
+1. `ansible-playbook -i hosts site.yml -K`
 
 ## Author
 [shibataka000](https://github.com/shibataka000)
