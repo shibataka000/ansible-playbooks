@@ -9,3 +9,4 @@
     - sbt
     - pyenv
     - virtualenv
+    - assert_all_roles_installed

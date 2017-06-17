@@ -1,0 +1,60 @@
+# docker
+- name: "Run 'docker version'"
+  shell: "docker version"
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"
+
+# docker-compose
+- name: "Run 'docker-compose version'"
+  shell: "docker-compose version"
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"
+
+# docker-machine
+- name: "Run 'docker-machine version'"
+  shell: "docker-machine version"
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"
+
+# terraform
+- name: "Run 'terraform version'"
+  shell: "terraform version"
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"
+
+# java
+- name: "Run 'java -version'"
+  shell: "java -version"
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"
+
+# sbt
+- name: "Run 'sbt sbt-version'"
+  shell: "sbt sbt-version"
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"
+
+# pyenv and pyenv-virtualenv
+- name: "Run 'pyenv version' and 'pyenv virtualenv --version'"
+  shell: |
+    export PATH="$HOME/.pyenv/bin:$PATH" && \
+    eval "$(pyenv init -)" && \
+    eval "$(pyenv virtualenv-init -)" && \
+    pyenv --version
+    pyenv virtualenv --version
+  register: output
+- name: "Result"
+  debug:
+    msg: "{{ output }}"

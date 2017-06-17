@@ -1,18 +1,13 @@
 language: python
 python:
   - "2.7"
-dist: "trusty"
+dist: trusty
+sudo: required
+services:
+  - docker
 install:
-  - "sudo pip install ansible"
-  - "sudo pip install urllib3 pyOpenSSL ndg-httpsclient pyasn1"
+  - docker build -t shibataka000/run_playbooks .
 script:
-  - "sudo ansible-playbook -i hosts site.yml"
-  - "docker version"
-  - "docker-compose version"
-  - "docker-machine version"
-  - "terraform version"
-  - "sbt sbt-version"
-  - "pyenv --version"
-  - "pyenv virtualenv --version"
+  - docker run -it --privileged shibataka000/run_playbooks
 notifications:
   email: false
