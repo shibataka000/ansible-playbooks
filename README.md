@@ -11,7 +11,7 @@ Install following tools.
 - [docker compose](https://github.com/docker/compose)
 - [docker machine](https://github.com/docker/machine)
 - [terraform](https://www.terraform.io/)
-- opejndk8
+- [openjdk8](http://openjdk.java.net/projects/jdk8/)
 - [sbt](http://www.scala-sbt.org/)
 - [pyenv](https://github.com/pyenv/pyenv)
 - [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
