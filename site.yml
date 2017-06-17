@@ -1,13 +1,17 @@
 - hosts: all
   become: yes
   roles:
+    # Add repository
     - docker
+    - openjdk8
+    - sbt
+    # Git clone
+    - pyenv
+    - pyenv_virtualenv
+    # Download binary
     - docker_compose
     - docker_machine
     - terraform
-    - openjdk8
-    - sbt
-    - pyenv
-    - pyenv_virtualenv
     - golang
+    # Test
     - assert_all_roles_installed
