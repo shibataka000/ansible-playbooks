@@ -13,3 +13,7 @@
   apt:
     name: docker-ce
     update_cache: yes
+- name: "Start docker daemon"
+  service:
+    name: docker
+    state: started
