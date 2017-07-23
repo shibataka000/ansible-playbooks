@@ -62,7 +62,9 @@
 
 # golang
 - name: "Run 'go version'"
-  shell: "/usr/local/go/bin/go version"
+  shell: |
+    export PATH="/usr/local/go/bin:$PATH"
+    go version
   register: output
 - name: "Result"
   debug:
