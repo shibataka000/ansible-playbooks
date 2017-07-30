@@ -46,20 +46,6 @@
   debug:
     msg: "{{ output }}"
 
-# pyenv and pyenv-virtualenv
-- name: "Run 'pyenv version' and 'pyenv virtualenv --version'"
-  become: false
-  shell: |
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-    pyenv --version
-    pyenv virtualenv --version
-  register: output
-- name: "Result"
-  debug:
-    msg: "{{ output }}"
-
 # golang
 - name: "Run 'go version'"
   shell: |

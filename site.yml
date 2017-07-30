@@ -5,9 +5,6 @@
     - docker
     - openjdk8
     - sbt
-    # Git clone
-    - pyenv
-    - pyenv_virtualenv
     # Download binary
     - docker_compose
     - docker_machine

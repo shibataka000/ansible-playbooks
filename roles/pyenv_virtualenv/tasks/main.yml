@@ -1,9 +1,0 @@
----
-- name: "Install git"
-  apt:
-    name: git
-- name: "Clone virtualenv"
-  become: false
-  git:
-    repo: "https://github.com/pyenv/pyenv-virtualenv.git"
-    dest: "{{ lookup('env', 'HOME')}}/.pyenv/plugins/pyenv-virtualenv"
