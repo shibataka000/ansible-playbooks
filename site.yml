@@ -13,5 +13,3 @@
     - sbt
     # Go
     - golang
-    # Test
-    - assert_all_roles_installed

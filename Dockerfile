@@ -9,4 +9,4 @@ RUN pip install ansible
 COPY . /ansible-playbooks
 
 WORKDIR /ansible-playbooks
-ENTRYPOINT ansible-playbook -i hosts site.yml
+ENTRYPOINT sh -x test.sh
