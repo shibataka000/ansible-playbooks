@@ -6,8 +6,8 @@ sudo: required
 services:
   - docker
 install:
-  - docker build -t shibataka000/ansible_playbooks .
+  - docker build -t shibataka000/ansible_playbooks_test .
 script:
-  - docker run -it --privileged shibataka000/ansible_playbooks
+  - docker run -it --privileged shibataka000/ansible_playbooks_test
 notifications:
   email: false
