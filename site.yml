@@ -1,14 +1,17 @@
 - hosts: all
   become: yes
   roles:
-    # Add repository
+    # Docker
     - docker
-    - openjdk8
-    - sbt
-    # Download binary
     - docker_compose
     - docker_machine
+    # Terraform
     - terraform
+    # Java8
+    - openjdk8
+    # Scala
+    - sbt
+    # Go
     - golang
     # Test
     - assert_all_roles_installed
