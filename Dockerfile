@@ -9,4 +9,4 @@ RUN pip install ansible
 COPY . /ansible-playbooks
 
 WORKDIR /ansible-playbooks
-ENTRYPOINT sh -x test.sh
+ENTRYPOINT ["sh", "-x", "test.sh"]
