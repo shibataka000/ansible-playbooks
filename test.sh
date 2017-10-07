@@ -10,5 +10,5 @@ docker-compose version || exit 1
 docker-machine version || exit 1
 terraform version || exit 1
 java -version || exit 1
-sbt sbt-version || exit 1
+sbt sbtVersion || exit 1
 go version || exit 1
