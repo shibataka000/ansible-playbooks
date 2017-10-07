@@ -13,8 +13,7 @@ Install following tools.
 - [terraform](https://www.terraform.io/)
 - [openjdk8](http://openjdk.java.net/projects/jdk8/)
 - [sbt](http://www.scala-sbt.org/)
-- [pyenv](https://github.com/pyenv/pyenv)
-- [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
+- [golang](https://golang.org/)
 
 ## Requirement
 - Ansible
