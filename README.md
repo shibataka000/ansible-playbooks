@@ -2,25 +2,16 @@
 
 [![Build Status](https://travis-ci.org/shibataka000/ansible-playbooks.svg?branch=master)](https://travis-ci.org/shibataka000/ansible-playbooks)
 
-Ansible playbook to setup my development environment.
+Ansible playbooks to setup my development environment.
 
-## Description
-Install following tools.
-
-- [docker](https://www.docker.com/)
-- [docker compose](https://github.com/docker/compose)
-- [docker machine](https://github.com/docker/machine)
-- [terraform](https://www.terraform.io/)
-- [openjdk8](http://openjdk.java.net/projects/jdk8/)
-- [sbt](http://www.scala-sbt.org/)
-- [golang](https://golang.org/)
+Playbooks are in [playbooks](./playbooks) directory.
 
 ## Requirement
-- Ansible
+- [Ansible](https://www.ansible.com/)
 
 ## Usage
 1. Edit [hosts](./hosts).
-1. `ansible-playbook -i hosts site.yml -K`
+1. Run playbook. For example, run `ansible-playbook -i hosts playbooks/docker.yml -K` to install docker.
 
 ## Author
 [shibataka000](https://github.com/shibataka000)

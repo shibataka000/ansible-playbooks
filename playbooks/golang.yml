@@ -1,0 +1,15 @@
+- hosts: all
+  become: yes
+  vars:
+    go_version: 1.9
+  tasks:
+    - name: "Download golang"
+      get_url:
+        url: https://storage.googleapis.com/golang/go{{ go_version }}.linux-amd64.tar.gz
+        dest: /tmp/golang.tar.gz
+        force: yes
+    - name: "Unarchive golang"
+      unarchive:
+        src: /tmp/golang.tar.gz
+        dest: /usr/local
+        remote_src: yes
