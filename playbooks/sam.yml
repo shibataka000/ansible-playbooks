@@ -1,0 +1,33 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: "Install unzip"
+      apt:
+        name: unzip
+    - name: "Download latest release info from GitHub"
+      get_url:
+        url: https://api.github.com/repos/awslabs/aws-sam-local/releases/latest
+        dest: /tmp/aws-sam-local.json
+        force: yes
+    - name: "Get latest release info"
+      shell: "cat /tmp/aws-sam-local.json"
+      register: releases
+    - name: "Get latest version"
+      set_fact:
+        version: "{{ (releases.stdout | from_json).tag_name | regex_replace('v', '')}}"
+    - name: "Download SAM-Local"
+      get_url:
+        url: https://github.com/awslabs/aws-sam-local/releases/download/v{{ version }}/sam_{{ version }}_linux_amd64.tar.gz
+        dest: /tmp/sam.tar.gz
+        force: yes
+    - name: "Unarchive SAM-Local"
+      unarchive:
+        src: /tmp/sam.tar.gz
+        dest: /tmp/
+        remote_src: yes
+    - name: "Copy SAM-Local"
+      copy:
+        src: /tmp/sam
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: 0755

@@ -22,3 +22,6 @@ sbt sbtVersion || exit 1
 ansible-playbook -i hosts playbooks/golang.yml || exit 1
 export PATH="/usr/local/go/bin:$PATH"
 go version || exit 1
+
+ansible-playbook -i hosts playbooks/sam.yml || exit 1
+sam --version || exit 1
