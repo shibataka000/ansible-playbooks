@@ -25,3 +25,6 @@ go version || exit 1
 
 ansible-playbook -i hosts playbooks/sam.yml || exit 1
 sam --version || exit 1
+
+ansible-playbook -i hosts playbooks/python.yml || exit 1
+python3 --version || exit 1

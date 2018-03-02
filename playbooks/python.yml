@@ -1,0 +1,38 @@
+- hosts: all
+  become: yes
+  vars:
+    python_version: 3.6.4
+  tasks:
+    - name: "Install gcc"
+      apt:
+        name: gcc
+    - name: "Install make"
+      apt:
+        name: make
+    - name: "Install libssl-dev"
+      apt:
+        name: libssl-dev
+    - name: "Install libreadline-dev"
+      apt:
+        name: libreadline-dev
+    - name: "Download Python-{{ python_version }}.tar.xz"
+      get_url:
+        url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tar.xz
+        dest: /tmp/Python-{{ python_version }}.tar.xz
+        force: yes
+    - name: "Unarchive Python-{{ python_version }}.tar.xz"
+      unarchive:
+        src: /tmp/Python-{{ python_version }}.tar.xz
+        dest: /usr/local/src/
+        remote_src: yes
+    - name: "./configure"
+      shell: ./configure
+      args:
+        chdir: /usr/local/src/Python-{{ python_version }}
+    - name: "make"
+      make:
+        chdir: /usr/local/src/Python-{{ python_version }}
+    - name: "make install"
+      make:
+        chdir: /usr/local/src/Python-{{ python_version }}
+        target: install
