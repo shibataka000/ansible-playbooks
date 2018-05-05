@@ -13,9 +13,6 @@ docker-machine version || exit 1
 ansible-playbook -i hosts playbooks/terraform.yml || exit 1
 terraform version || exit 1
 
-ansible-playbook -i hosts playbooks/openjdk8.yml || exit 1
-java -version || exit 1
-
 ansible-playbook -i hosts playbooks/sbt.yml || exit 1
 sbt sbtVersion || exit 1
 
