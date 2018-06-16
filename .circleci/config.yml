@@ -175,6 +175,16 @@ workflows:
       - golang
       - sam
       - python
+  nightly:
+    jobs:
+      - docker
+      - docker_compose
+      - docker_machine
+      - terraform
+      - sbt
+      - golang
+      - sam
+      - python
     triggers:
       - schedule:
           cron: "0 0 * * 0"
