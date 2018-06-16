@@ -1,6 +1,10 @@
 - hosts: all
   become: yes
   tasks:
+    - name: "Install lsb-release"
+      apt:
+        name: lsb-release
+        update_cache: yes
     - name: "Add GPG key"
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -9,7 +13,7 @@
       register: lsb_release
     - name: "Add repository"
       apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable edge"
     - name: "Install docker"
       apt:
         name: docker-ce
