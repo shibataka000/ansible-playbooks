@@ -1,0 +1,184 @@
+version: 2
+jobs:
+  # docker
+  docker:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install docker
+          command: |
+            ansible-playbook -i hosts playbooks/docker.yml
+      - run:
+          name: Show docker version
+          command: |
+            service docker start
+            sleep 10
+            docker version
+  # docker_compose
+  docker_compose:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install docker-compose
+          command: |
+            ansible-playbook -i hosts playbooks/docker_compose.yml
+      - run:
+          name: Show docker-compose version
+          command: |
+            docker-compose version
+  # docker_machine
+  docker_machine:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install docker-machine
+          command: |
+            ansible-playbook -i hosts playbooks/docker_machine.yml
+      - run:
+          name: Show docker-machine version
+          command: |
+            docker-machine version
+  # terraform
+  terraform:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install terraform
+          command: |
+            ansible-playbook -i hosts playbooks/terraform.yml
+      - run:
+          name: Show terraform version
+          command: |
+            terraform version
+  # sbt
+  sbt:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install sbt
+          command: |
+            ansible-playbook -i hosts playbooks/sbt.yml
+      - run:
+          name: Show sbt version
+          command: |
+            sbt sbtVersion
+  # golang
+  golang:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install golang
+          command: |
+            ansible-playbook -i hosts playbooks/golang.yml
+      - run:
+          name: Show golang version
+          command: |
+            export PATH="/usr/local/go/bin:$PATH"
+            go version
+  # sam
+  sam:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install sam
+          command: |
+            ansible-playbook -i hosts playbooks/sam.yml
+      - run:
+          name: Show sam version
+          command: |
+            sam --version
+  # python
+  python:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install sam
+          command: |
+            ansible-playbook -i hosts playbooks/python.yml
+      - run:
+          name: Show python version
+          command: |
+            python3 --version
+workflows:
+  version: 2
+  build:
+    jobs:
+      - docker
+      - docker_compose
+      - docker_machine
+      - terraform
+      - sbt
+      - golang
+      - sam
+      - python
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master

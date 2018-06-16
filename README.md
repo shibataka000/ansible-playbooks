@@ -1,6 +1,6 @@
 # Ansible Playbooks
 
-[![Build Status](https://travis-ci.org/shibataka000/ansible-playbooks.svg?branch=master)](https://travis-ci.org/shibataka000/ansible-playbooks)
+[![CircleCI](https://circleci.com/gh/shibataka000/ansible-playbooks.svg?style=svg)](https://circleci.com/gh/shibataka000/ansible-playbooks)
 
 Ansible playbooks to setup my development environment.
 
