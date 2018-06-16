@@ -6,15 +6,23 @@
     - name: "Install gcc"
       apt:
         name: gcc
+        update_cache: yes
     - name: "Install make"
       apt:
         name: make
+        update_cache: yes
     - name: "Install libssl-dev"
       apt:
         name: libssl-dev
+        update_cache: yes
     - name: "Install libreadline-dev"
       apt:
         name: libreadline-dev
+        update_cache: yes
+    - name: "Install zlib1g-dev"
+      apt:
+        name: zlib1g-dev
+        update_cache: yes
     - name: "Download Python-{{ python_version }}.tar.xz"
       get_url:
         url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tar.xz
