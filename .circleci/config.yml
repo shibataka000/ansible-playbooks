@@ -19,8 +19,6 @@ jobs:
       - run:
           name: Show docker version
           command: |
-            service docker start
-            sleep 10
             docker version
   # docker_compose
   docker_compose:
