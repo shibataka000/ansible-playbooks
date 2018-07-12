@@ -149,7 +149,6 @@ workflows:
       - docker_compose
       - docker_machine
       - terraform
-      - sbt
       - golang
       - sam
       - python
@@ -159,7 +158,6 @@ workflows:
       - docker_compose
       - docker_machine
       - terraform
-      - sbt
       - golang
       - sam
       - python
