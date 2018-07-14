@@ -142,7 +142,7 @@ jobs:
           command: |
             python3 --version
   # PowerShell
-  python:
+  powershell:
     docker:
       - image: ubuntu
     steps:
@@ -158,11 +158,11 @@ jobs:
           command: |
             ansible-playbook -i hosts playbooks/powershell.yml
       - run:
-          name: Show python version
+          name: Show PowerShell version
           command: |
             pwsh-preview --version
   # Azure CLI
-  python:
+  azurecli:
     docker:
       - image: ubuntu
     steps:
@@ -178,7 +178,7 @@ jobs:
           command: |
             ansible-playbook -i hosts playbooks/azurecli.yml
       - run:
-          name: Show python version
+          name: Show Azure CLI version
           command: |
             az --version
 workflows:
