@@ -161,6 +161,26 @@ jobs:
           name: Show python version
           command: |
             pwsh-preview --version
+  # Azure CLI
+  python:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install Azure CLI
+          command: |
+            ansible-playbook -i hosts playbooks/azurecli.yml
+      - run:
+          name: Show python version
+          command: |
+            az --version
 workflows:
   version: 2
   build:
@@ -173,6 +193,7 @@ workflows:
       - sam
       - python
       - powershell
+      - azurecli
   nightly:
     jobs:
       - docker
@@ -183,6 +204,7 @@ workflows:
       - sam
       - python
       - powershell
+      - azurecli
     triggers:
       - schedule:
           cron: "0 0 * * 0"

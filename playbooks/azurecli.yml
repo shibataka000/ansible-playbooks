@@ -1,0 +1,24 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: "Install lsb-release"
+      apt:
+        name: lsb-release
+        update_cache: yes
+    - name: "Get \"lsb_release -cs\""
+      shell: "lsb_release -cs"
+      register: lsb_release
+    - name: "Add repository"
+      apt_repository:
+        repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ lsb_release.stdout }} main"
+    - name: "Add apt key"
+      apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+    - name: "Install apt-transport-https"
+      apt:
+        name: apt-transport-https
+        update_cache: yes
+    - name: "Install azurecli"
+      apt:
+        name: azure-cli
+        update_cache: yes
