@@ -1,0 +1,13 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: "Add apt key"
+      apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+    - name: "Add repository"
+      apt_repository:
+        repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main"
+    - name: "Install powershell"
+      apt:
+        name: powershell-preview
+        update_cache: yes

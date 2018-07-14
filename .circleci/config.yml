@@ -141,6 +141,26 @@ jobs:
           name: Show python version
           command: |
             python3 --version
+  # PowerShell
+  python:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install PowerShell
+          command: |
+            ansible-playbook -i hosts playbooks/powershell.yml
+      - run:
+          name: Show python version
+          command: |
+            pwsh-preview --version
 workflows:
   version: 2
   build:
@@ -152,6 +172,7 @@ workflows:
       - golang
       - sam
       - python
+      - powershell
   nightly:
     jobs:
       - docker
@@ -161,6 +182,7 @@ workflows:
       - golang
       - sam
       - python
+      - powershell
     triggers:
       - schedule:
           cron: "0 0 * * 0"
