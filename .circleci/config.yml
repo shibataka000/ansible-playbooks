@@ -80,6 +80,26 @@ jobs:
           name: Show terraform version
           command: |
             terraform version
+  # sbt
+  sbt:
+    docker:
+      - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install ansible
+          command: |
+            apt-get update
+            apt-get install python-pip -y
+            pip install ansible
+      - run:
+          name: Install sbt
+          command: |
+            ansible-playbook -i hosts playbooks/sbt.yml
+      - run:
+          name: Show sbt version
+          command: |
+            sbt sbtVersion
   # golang
   golang:
     docker:
@@ -189,6 +209,7 @@ workflows:
       - docker_compose
       - docker_machine
       - terraform
+      - sbt
       - golang
       - sam
       - python
@@ -200,6 +221,7 @@ workflows:
       - docker_compose
       - docker_machine
       - terraform
+      - sbt
       - golang
       - sam
       - python
