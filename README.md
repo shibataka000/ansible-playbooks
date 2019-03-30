@@ -1,6 +1,6 @@
 # Ansible Playbooks
 
-[![CircleCI](https://circleci.com/gh/shibataka000/ansible-playbooks.svg?style=svg)](https://circleci.com/gh/shibataka000/ansible-playbooks)
+[![CircleCI](https://circleci.com/gh/shibataka000/ansible-playbooks.svg?style=shield)](https://circleci.com/gh/shibataka000/ansible-playbooks)
 
 Ansible playbooks to setup my development environment.
 
