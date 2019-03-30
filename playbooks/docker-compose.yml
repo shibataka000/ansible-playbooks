@@ -1,18 +1,18 @@
 - hosts: all
   become: yes
   vars:
+    - name: docker-compose
     - repo: docker/compose
     - asset_id: docker-compose-Linux-x86_64
     - release_id: latest
-    - binary_name: docker-compose
   tasks:
     - name: "Download release info"
       get_url:
         url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
-        dest: "/tmp/{{ binary_name }}.json"
+        dest: "/tmp/{{ name }}.json"
         force: yes
     - name: "Get release info"
-      shell: "cat /tmp/{{ binary_name }}.json"
+      shell: "cat /tmp/{{ name }}.json"
       register: releases
     - name: "Get version"
       set_fact:
@@ -20,7 +20,7 @@
     - name: "Install release binary"
       get_url:
         url: https://github.com/{{ repo }}/releases/download/{{ version }}/{{ asset_id }}
-        dest: /usr/local/bin/{{ binary_name }}
+        dest: /usr/local/bin/{{ name }}
         mode: 0775
         force: yes
     - name: "Make sure installed"

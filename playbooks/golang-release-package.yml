@@ -14,16 +14,16 @@
       private: no
       default: latest
   tasks:
-    - name: "Get binary name"
+    - name: "Get name"
       set_fact:
-        binary_name: "{{ repo.split('/')[1] }}"
+        name: "{{ repo.split('/')[1] }}"
     - name: "Download release info"
       get_url:
         url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
-        dest: "/tmp/{{ binary_name }}.json"
+        dest: "/tmp/{{ name }}.json"
         force: yes
     - name: "Get release info"
-      shell: "cat /tmp/{{ binary_name }}.json"
+      shell: "cat /tmp/{{ name }}.json"
       register: releases
     - name: "Get version"
       set_fact:
@@ -31,6 +31,6 @@
     - name: "Install release binary"
       get_url:
         url: https://github.com/{{ repo }}/releases/download/{{ version }}/{{ asset_id }}
-        dest: /usr/local/bin/{{ binary_name }}
+        dest: /usr/local/bin/{{ name }}
         mode: 0775
         force: yes
