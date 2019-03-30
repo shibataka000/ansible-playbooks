@@ -1,9 +1,12 @@
-version: 2
+version: 2.1
 jobs:
-  # docker
-  docker:
+  playbook:
     docker:
       - image: ubuntu
+    parameters:
+      playbook:
+        type: string
+        default: ""
     steps:
       - checkout
       - run:
@@ -13,242 +16,80 @@ jobs:
             apt-get install python-pip -y
             pip install ansible
       - run:
-          name: Install docker
+          name: Install ansible playbook
           command: |
-            ansible-playbook -i hosts playbooks/docker.yml
-      - run:
-          name: Show docker version
-          command: |
-            docker version
-  # docker_compose
-  docker_compose:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install docker-compose
-          command: |
-            ansible-playbook -i hosts playbooks/docker_compose.yml
-      - run:
-          name: Show docker-compose version
-          command: |
-            docker-compose version
-  # docker_machine
-  docker_machine:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install docker-machine
-          command: |
-            ansible-playbook -i hosts playbooks/docker_machine.yml
-      - run:
-          name: Show docker-machine version
-          command: |
-            docker-machine version
-  # terraform
-  terraform:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install terraform
-          command: |
-            ansible-playbook -i hosts playbooks/terraform.yml
-      - run:
-          name: Show terraform version
-          command: |
-            terraform version
-  # sbt
-  sbt:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install sbt
-          command: |
-            ansible-playbook -i hosts playbooks/sbt.yml
-      - run:
-          name: Show sbt version
-          command: |
-            sbt sbtVersion
-  # golang
-  golang:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install golang
-          command: |
-            ansible-playbook -i hosts playbooks/golang.yml
-      - run:
-          name: Show golang version
-          command: |
-            export PATH="/usr/local/go/bin:$PATH"
-            go version
-  # sam
-  sam:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install sam
-          command: |
-            ansible-playbook -i hosts playbooks/sam.yml
-      - run:
-          name: Show sam version
-          command: |
-            sam --version
-  # python
-  python:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install sam
-          command: |
-            ansible-playbook -i hosts playbooks/python.yml
-      - run:
-          name: Show python version
-          command: |
-            python3 --version
-  # PowerShell
-  powershell:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install PowerShell
-          command: |
-            ansible-playbook -i hosts playbooks/powershell.yml
-      - run:
-          name: Show PowerShell version
-          command: |
-            pwsh-preview --version
-  # Azure CLI
-  azurecli:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install Azure CLI
-          command: |
-            ansible-playbook -i hosts playbooks/azurecli.yml
-      - run:
-          name: Show Azure CLI version
-          command: |
-            az --version
-  # .NET Core
-  dotnetcore:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install ansible
-          command: |
-            apt-get update
-            apt-get install python-pip -y
-            pip install ansible
-      - run:
-          name: Install .NET Core
-          command: |
-            ansible-playbook -i hosts playbooks/dotnetcore.yml
-      - run:
-          name: Show .NET Core version
-          command: |
-            dotnet --version
+            ansible-playbook -i hosts playbooks/<< parameters.playbook >>.yml
 workflows:
-  version: 2
   build:
     jobs:
-      - docker
-      - docker_compose
-      - docker_machine
-      - terraform
-      - sbt
-      - golang
-      - sam
-      - python
-      - powershell
-      - azurecli
-      - dotnetcore
+      - playbook:
+          name: docker
+          playbook: docker
+      - playbook:
+          name: docker_compose
+          playbook: docker_compose
+      - playbook:
+          name: docker_machine
+          playbook: docker_machine
+      - playbook:
+          name: terraform
+          playbook: terraform
+      - playbook:
+          name: sbt
+          playbook: sbt
+      - playbook:
+          name: golang
+          playbook: golang
+      - playbook:
+          name: sam
+          playbook: sam
+      - playbook:
+          name: python
+          playbook: python
+      - playbook:
+          name: powershell
+          playbook: powershell
+      - playbook:
+          name: azurecli
+          playbook: azurecli
+      - playbook:
+          name: dotnetcore
+          playbook: dotnetcore
   nightly:
     jobs:
-      - docker
-      - docker_compose
-      - docker_machine
-      - terraform
-      - sbt
-      - golang
-      - sam
-      - python
-      - powershell
-      - azurecli
-      - dotnetcore
+      - playbook:
+          name: docker
+          playbook: docker
+      - playbook:
+          name: docker_compose
+          playbook: docker_compose
+      - playbook:
+          name: docker_machine
+          playbook: docker_machine
+      - playbook:
+          name: terraform
+          playbook: terraform
+      - playbook:
+          name: sbt
+          playbook: sbt
+      - playbook:
+          name: golang
+          playbook: golang
+      - playbook:
+          name: sam
+          playbook: sam
+      - playbook:
+          name: python
+          playbook: python
+      - playbook:
+          name: powershell
+          playbook: powershell
+      - playbook:
+          name: azurecli
+          playbook: azurecli
+      - playbook:
+          name: dotnetcore
+          playbook: dotnetcore
     triggers:
       - schedule:
           cron: "0 0 * * 0"
