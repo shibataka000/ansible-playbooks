@@ -18,9 +18,10 @@
       apt:
         name: docker-ce
         update_cache: yes
-    - name: "Start docker daemon"
-      service:
-        name: docker
-        state: started
-    - name: "Make sure installed"
-      shell: "docker version"
+    # Comment in following tasks when you run this playbook.
+    # - name: "Start docker daemon"
+    #   service:
+    #     name: docker
+    #     state: started
+    # - name: "Make sure installed"
+    #   shell: "docker version"
