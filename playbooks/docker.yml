@@ -22,3 +22,5 @@
       service:
         name: docker
         state: started
+    - name: "Make sure installed"
+      shell: "docker version"

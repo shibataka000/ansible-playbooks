@@ -18,3 +18,5 @@
         dest: /usr/local/bin/docker-machine
         mode: 0775
         force: yes
+    - name: "Make sure installed"
+      shell: "docker-machine version"

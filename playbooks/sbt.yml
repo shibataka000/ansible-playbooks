@@ -16,3 +16,5 @@
       apt:
         name: sbt
         update_cache: yes
+    - name: "Make sure installed"
+      shell: "sbt sbtVersion"

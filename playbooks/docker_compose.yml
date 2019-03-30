@@ -18,3 +18,5 @@
         dest: /usr/local/bin/docker-compose
         mode: 0775
         force: yes
+    - name: "Make sure installed"
+      shell: "docker-compose version"

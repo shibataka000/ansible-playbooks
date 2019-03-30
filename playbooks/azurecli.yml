@@ -22,3 +22,5 @@
       apt:
         name: azure-cli
         update_cache: yes
+    - name: "Make sure installed"
+      shell: "az --version"

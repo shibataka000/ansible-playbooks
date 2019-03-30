@@ -19,3 +19,5 @@
       apt:
         name: dotnet-sdk-2.1
         update_cache: yes
+    - name: "Make sure installed"
+      shell: "dotnet --version"

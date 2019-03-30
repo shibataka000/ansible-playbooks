@@ -11,3 +11,5 @@
       apt:
         name: powershell-preview
         update_cache: yes
+    - name: "Make sure installed"
+      shell: "pwsh-preview --version"

@@ -13,3 +13,5 @@
         src: /tmp/golang.tar.gz
         dest: /usr/local
         remote_src: yes
+    - name: "Make sure installed"
+      shell: "/usr/local/go/bin/go version"
