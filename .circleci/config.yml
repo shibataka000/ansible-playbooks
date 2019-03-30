@@ -26,11 +26,11 @@ workflows:
           name: docker
           playbook: docker
       - playbook:
-          name: docker_compose
-          playbook: docker_compose
+          name: docker-compose
+          playbook: docker-compose
       - playbook:
-          name: docker_machine
-          playbook: docker_machine
+          name: docker-machine
+          playbook: docker-machine
       - playbook:
           name: terraform
           playbook: terraform
@@ -58,11 +58,11 @@ workflows:
           name: docker
           playbook: docker
       - playbook:
-          name: docker_compose
-          playbook: docker_compose
+          name: docker-compose
+          playbook: docker-compose
       - playbook:
-          name: docker_machine
-          playbook: docker_machine
+          name: docker-machine
+          playbook: docker-machine
       - playbook:
           name: terraform
           playbook: terraform
