@@ -35,9 +35,6 @@ workflows:
           name: terraform
           playbook: terraform
       - playbook:
-          name: sbt
-          playbook: sbt
-      - playbook:
           name: golang
           playbook: golang
       - playbook:
@@ -69,9 +66,6 @@ workflows:
       - playbook:
           name: terraform
           playbook: terraform
-      - playbook:
-          name: sbt
-          playbook: sbt
       - playbook:
           name: golang
           playbook: golang
