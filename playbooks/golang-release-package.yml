@@ -1,0 +1,36 @@
+- hosts: all
+  become: yes
+  vars_prompt:
+    - name: repo
+      prompt: "Enter repository name"
+      private: no
+      default: docker/compose
+    - name: asset_name
+      prompt: "Enter asset name"
+      private: no
+      default: docker-compose-Linux-x86_64
+    - name: release_id
+      prompt: "Enter release id"
+      private: no
+      default: latest
+  tasks:
+    - name: "Get repository name"
+      set_fact:
+        repo_name: "{{ repo.split('/')[0] }}"
+    - name: "Download release info"
+      get_url:
+        url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
+        dest: "/tmp/{{ repo_name }}.json"
+        force: yes
+    - name: "Get release info"
+      shell: "cat /tmp/{{ repo_name }}.json"
+      register: releases
+    - name: "Get version"
+      set_fact:
+        version: "{{ (releases.stdout | from_json).tag_name }}"
+    - name: "Install release binary"
+      get_url:
+        url: https://github.com/{{ repo }}/releases/download/{{ version }}/{{ asset_name }}
+        dest: /usr/local/bin/{{ repo_name }}
+        mode: 0775
+        force: yes
