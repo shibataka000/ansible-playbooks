@@ -45,4 +45,4 @@
         chdir: /usr/local/src/Python-{{ python_version }}
         target: install
     - name: "Make sure installed"
-      shell: "python3 version"
+      shell: "python3 --version"
