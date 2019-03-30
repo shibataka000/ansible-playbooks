@@ -1,21 +1,26 @@
 - hosts: all
   become: yes
+  vars:
+    - repo: docker/machine
+    - asset_id: docker-machine-Linux-x86_64
+    - release_id: latest
+    - binary_name: docker-machine
   tasks:
-    - name: "Download latest release info from GitHub"
+    - name: "Download release info"
       get_url:
-        url: https://api.github.com/repos/docker/machine/releases/latest
-        dest: /tmp/docker_machine.json
+        url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
+        dest: "/tmp/{{ binary_name }}.json"
         force: yes
-    - name: "Get latest release info"
-      shell: "cat /tmp/docker_machine.json"
+    - name: "Get release info"
+      shell: "cat /tmp/{{ binary_name }}.json"
       register: releases
-    - name: "Get latest version"
+    - name: "Get version"
       set_fact:
         version: "{{ (releases.stdout | from_json).tag_name }}"
-    - name: "Download docker-machine"
+    - name: "Install release binary"
       get_url:
-        url: https://github.com/docker/machine/releases/download/{{ version }}/docker-machine-Linux-x86_64
-        dest: /usr/local/bin/docker-machine
+        url: https://github.com/{{ repo }}/releases/download/{{ version }}/{{ asset_id }}
+        dest: /usr/local/bin/{{ binary_name }}
         mode: 0775
         force: yes
     - name: "Make sure installed"

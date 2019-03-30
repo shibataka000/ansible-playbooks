@@ -1,18 +1,20 @@
 - hosts: all
   become: yes
+  vars:
+    - release_id: latest
   tasks:
     - name: "Install unzip"
       apt:
         name: unzip
-    - name: "Download latest release info from GitHub"
+    - name: "Download release info"
       get_url:
-        url: https://api.github.com/repos/hashicorp/terraform/releases/latest
-        dest: /tmp/terraform.json
+        url: https://api.github.com/repos/hashicorp/terraform/releases/{{ release_id }}
+        dest: "/tmp/terraform.json"
         force: yes
-    - name: "Get latest release info"
+    - name: "Get release info"
       shell: "cat /tmp/terraform.json"
       register: releases
-    - name: "Get latest version"
+    - name: "Get version"
       set_fact:
         version: "{{ (releases.stdout | from_json).tag_name | regex_replace('v', '')}}"
     - name: "Download terraform"

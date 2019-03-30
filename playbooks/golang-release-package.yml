@@ -4,33 +4,33 @@
     - name: repo
       prompt: "Enter repository name"
       private: no
-      default: docker/compose
-    - name: asset_name
+      default: wercker/stern
+    - name: asset_id
       prompt: "Enter asset name"
       private: no
-      default: docker-compose-Linux-x86_64
+      default: stern_linux_amd64
     - name: release_id
-      prompt: "Enter release id"
+      prompt: "Enter release name"
       private: no
       default: latest
   tasks:
-    - name: "Get repository name"
+    - name: "Get binary name"
       set_fact:
-        repo_name: "{{ repo.split('/')[1] }}"
+        binary_name: "{{ repo.split('/')[1] }}"
     - name: "Download release info"
       get_url:
         url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
-        dest: "/tmp/{{ repo_name }}.json"
+        dest: "/tmp/{{ binary_name }}.json"
         force: yes
     - name: "Get release info"
-      shell: "cat /tmp/{{ repo_name }}.json"
+      shell: "cat /tmp/{{ binary_name }}.json"
       register: releases
     - name: "Get version"
       set_fact:
         version: "{{ (releases.stdout | from_json).tag_name }}"
     - name: "Install release binary"
       get_url:
-        url: https://github.com/{{ repo }}/releases/download/{{ version }}/{{ asset_name }}
-        dest: /usr/local/bin/{{ repo_name }}
+        url: https://github.com/{{ repo }}/releases/download/{{ version }}/{{ asset_id }}
+        dest: /usr/local/bin/{{ binary_name }}
         mode: 0775
         force: yes
