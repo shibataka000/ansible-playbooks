@@ -4,11 +4,9 @@
     - name: repo
       prompt: "Enter repository name"
       private: no
-      default: wercker/stern
     - name: asset_id
       prompt: "Enter asset name"
       private: no
-      default: stern_linux_amd64
     - name: release_id
       prompt: "Enter release name"
       private: no
