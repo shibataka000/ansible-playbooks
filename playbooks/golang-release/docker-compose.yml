@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  vars:
+    - repo: docker/compose
+    - binary_name: docker-compose
+    - asset_id: docker-compose-Linux-x86_64
+    - release_id: latest
+  tasks:
+    - name: "Install release binary"
+      include: "install-release-binary.yml"
+    - name: "Make sure installed"
+      shell: "docker-compose version"

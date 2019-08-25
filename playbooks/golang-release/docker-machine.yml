@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  vars:
+    - repo: docker/machine
+    - binary_name: docker-machine
+    - asset_id: docker-machine-Linux-x86_64
+    - release_id: latest
+  tasks:
+    - name: "Install release binary"
+      include: "install-release-binary.yml"
+    - name: "Make sure installed"
+      shell: "docker-machine version"
