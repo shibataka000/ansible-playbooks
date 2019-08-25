@@ -1,8 +1,8 @@
 - hosts: all
   become: yes
   vars:
-    - name: terraform
     - repo: hashicorp/terraform
+    - binary_name: terraform
     - release_id: latest
   tasks:
     - name: "Install unzip"
@@ -11,10 +11,10 @@
     - name: "Download release info"
       get_url:
         url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
-        dest: "/tmp/{{ name }}.json"
+        dest: "/tmp/{{ binary_name }}.json"
         force: yes
     - name: "Get release info"
-      shell: "cat /tmp/{{ name }}.json"
+      shell: "cat /tmp/{{ binary_name }}.json"
       register: releases
     - name: "Get version"
       set_fact:
@@ -22,11 +22,11 @@
     - name: "Download terraform"
       get_url:
         url: https://releases.hashicorp.com/terraform/{{ version }}/terraform_{{ version }}_linux_amd64.zip
-        dest: "/tmp/{{ name }}.zip"
+        dest: "/tmp/{{ binary_name }}.zip"
         force: yes
     - name: "Unarchive terraform"
       unarchive:
-        src: "/tmp/{{ name }}.zip"
+        src: "/tmp/{{ binary_name }}.zip"
         dest: /usr/local/bin
         remote_src: yes
     - name: "Make sure installed"
