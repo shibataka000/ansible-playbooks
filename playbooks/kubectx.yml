@@ -7,13 +7,13 @@
         dest: /usr/local/bin/kubectx
         mode: 0775
         force: yes
-    - name: "Make sure kubectx installed"
-      shell: "kubectx --help"
     - name: "Install kubens"
       get_url:
         url: https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
         dest: /usr/local/bin/kubens
         mode: 0775
         force: yes
-    - name: "Make sure kubens installed"
-      shell: "kubens --help"
+    # - name: "Make sure kubectx installed"
+    #   shell: "kubectx --help"
+    # - name: "Make sure kubens installed"
+    #   shell: "kubens --help"
