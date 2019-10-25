@@ -55,6 +55,9 @@ workflows:
       - playbook:
           name: kubectx
           playbook: kubectx
+      - playbook:
+          name: kubectl-bindrole
+          playbook: kubectl-bindrole
   nightly:
     jobs:
       - playbook:
@@ -90,6 +93,9 @@ workflows:
       - playbook:
           name: kubectx
           playbook: kubectx
+      - playbook:
+          name: kubectl-bindrole
+          playbook: kubectl-bindrole
     triggers:
       - schedule:
           cron: "0 0 * * 0"
