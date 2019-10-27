@@ -1,0 +1,17 @@
+# Input variables
+# - repo
+# - release_id
+# Output variables
+# - tag_name
+- name: "Download GitHub release info"
+  get_url:
+    url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
+    dest: /tmp
+    force: yes
+  register: download
+- name: "Read GitHub release info"
+  shell: "cat {{ download.dest }}"
+  register: release_info
+- name: "Get GitHub release tag name"
+  set_fact:
+    tag_name: "{{ (release_info.stdout | from_json).tag_name }}"
