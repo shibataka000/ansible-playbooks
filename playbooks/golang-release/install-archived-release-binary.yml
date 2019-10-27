@@ -1,0 +1,30 @@
+- name: "Download release info"
+  get_url:
+    url: https://api.github.com/repos/{{ repo }}/releases/{{ release_id }}
+    dest: "/tmp/{{ binary_name }}.json"
+    force: yes
+- name: "Get release info"
+  shell: "cat /tmp/{{ binary_name }}.json"
+  register: releases
+- name: "Get version"
+  set_fact:
+    version: "{{ (releases.stdout | from_json).tag_name }}"
+- name: "Download release asset"
+  get_url:
+    url: https://github.com/{{ repo }}/releases/download/{{ version }}/{{ asset_id }}
+    dest: /tmp
+    force: yes
+  register: download
+- name: "Unarchive release asset"
+  unarchive:
+    src: "{{ download.dest }}"
+    dest: /tmp
+    remote_src: yes
+    list_files: yes
+  register: archived_contents
+- name: "Copy release binary"
+  copy:
+    src: /tmp/{{ archived_contents.files[0] }}/{{ path_in_archive }}
+    dest: /usr/local/bin/{{ binary_name }}
+    mode: 0775
+    force: yes
