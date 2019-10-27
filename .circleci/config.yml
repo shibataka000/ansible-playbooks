@@ -29,9 +29,6 @@ workflows:
           name: docker-compose
           playbook: golang-release/docker-compose
       - playbook:
-          name: docker-machine
-          playbook: golang-release/docker-machine
-      - playbook:
           name: terraform
           playbook: terraform
       - playbook:
@@ -63,9 +60,6 @@ workflows:
       - playbook:
           name: docker-compose
           playbook: golang-release/docker-compose
-      - playbook:
-          name: docker-machine
-          playbook: golang-release/docker-machine
       - playbook:
           name: terraform
           playbook: terraform
