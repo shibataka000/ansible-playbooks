@@ -19,14 +19,15 @@
     - name: "Get version"
       set_fact:
         version: "{{ (releases.stdout | from_json).tag_name | regex_replace('v', '')}}"
-    - name: "Download terraform"
+    - name: "Download release asset"
       get_url:
         url: https://releases.hashicorp.com/terraform/{{ version }}/terraform_{{ version }}_linux_amd64.zip
-        dest: "/tmp/{{ binary_name }}.zip"
+        dest: /tmp
         force: yes
-    - name: "Unarchive terraform"
+      register: download
+    - name: "Unarchive and install release binary"
       unarchive:
-        src: "/tmp/{{ binary_name }}.zip"
+        src: "{{ download.dest }}"
         dest: /usr/local/bin
         remote_src: yes
     - name: "Make sure installed"
