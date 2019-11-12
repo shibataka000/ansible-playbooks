@@ -14,5 +14,5 @@
         download_url: https://github.com/{{ repo }}/releases/download/{{ tag_name }}/{{ asset_id }}
     - name: "Install release binary"
       include: "../tasks/install-archived-release-binary.yml"
-    # - name: "Make sure installed"
-    #   shell: "kubectl bindrole --version"
+    - name: "Make sure installed"
+      shell: "kubectl bindrole --version"
