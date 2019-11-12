@@ -15,4 +15,4 @@
     - name: "Install release binary"
       include: "../tasks/install-archived-release-binary.yml"
     - name: "Make sure installed"
-      shell: "istioctl version"
+      shell: "istioctl version --remote=false"
