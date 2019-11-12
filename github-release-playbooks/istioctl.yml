@@ -1,0 +1,18 @@
+- hosts: all
+  become: yes
+  vars:
+    - repo: istio/istio
+    - binary_name: istioctl
+    - asset_id: istio-1.3.5-linux.tar.gz
+    - release_id: tags/1.3.5
+    - path_in_archive: bin/istioctl
+  tasks:
+    - name: "Get GitHub release tag name"
+      include: "../tasks/get-github-release-tag-name.yml"
+    - name: "Set download url"
+      set_fact:
+        download_url: https://github.com/{{ repo }}/releases/download/{{ tag_name }}/{{ asset_id }}
+    - name: "Install release binary"
+      include: "../tasks/install-archived-release-binary.yml"
+    - name: "Make sure installed"
+      shell: "istioctl version"
