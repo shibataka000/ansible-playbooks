@@ -2,7 +2,7 @@
   become: yes
   vars:
     - repo: helm/helm
-    - release_id: tags/v3.0.0-beta.5
+    - release_id: tags/v3.0.2
     - path_in_archive: helm
     - binary_name: helm
   tasks:
