@@ -3,8 +3,8 @@
   vars:
     - repo: istio/istio
     - binary_name: istioctl
-    - asset_id: istio-1.3.5-linux.tar.gz
-    - release_id: tags/1.3.5
+    - asset_id: istio-1.4.2-linux.tar.gz
+    - release_id: tags/1.4.2
     - path_in_archive: bin/istioctl
   tasks:
     - name: "Get GitHub release tag name"
