@@ -52,6 +52,9 @@ workflows:
       - playbook:
           name: helm
           playbook: helm
+      - playbook:
+          name: awscli
+          playbook: awscli
   nightly:
     jobs:
       - playbook:
@@ -84,6 +87,9 @@ workflows:
       - playbook:
           name: helm
           playbook: helm
+      - playbook:
+          name: awscli
+          playbook: awscli
     triggers:
       - schedule:
           cron: "0 0 * * 0"
