@@ -26,9 +26,6 @@ workflows:
           name: docker
           playbook: docker
       - playbook:
-          name: terraform
-          playbook: terraform
-      - playbook:
           name: golang
           playbook: golang
       - playbook:
@@ -49,9 +46,6 @@ workflows:
       - playbook:
           name: kubectx
           playbook: kubectx
-      - playbook:
-          name: helm
-          playbook: helm
       - playbook:
           name: awscli
           playbook: awscli
@@ -61,9 +55,6 @@ workflows:
           name: docker
           playbook: docker
       - playbook:
-          name: terraform
-          playbook: terraform
-      - playbook:
           name: golang
           playbook: golang
       - playbook:
@@ -84,9 +75,6 @@ workflows:
       - playbook:
           name: kubectx
           playbook: kubectx
-      - playbook:
-          name: helm
-          playbook: helm
       - playbook:
           name: awscli
           playbook: awscli

@@ -4,7 +4,7 @@
 
 Ansible playbooks to setup my development environment.
 
-Playbooks are in [playbooks](./playbooks) and [github-release-playbooks](./github-release-playbooks) directory.
+Playbooks are in [playbooks](./playbooks) directory.
 
 ## Requirement
 - [Ansible](https://www.ansible.com/)

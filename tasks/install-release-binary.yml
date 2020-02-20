@@ -1,9 +1,0 @@
-# Input variables
-# - download_url
-# - binary_name
-- name: "Install release binary"
-  get_url:
-    url: "{{ download_url }}"
-    dest: /usr/local/bin/{{ binary_name }}
-    mode: 0775
-    force: yes
