@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   playbook:
     docker:
-      - image: ubuntu
+      - image: ubuntu:18.04
     parameters:
       playbook:
         type: string
