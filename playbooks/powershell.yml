@@ -1,12 +1,19 @@
 - hosts: all
   become: yes
   tasks:
+    - name: "Install lsb-release"
+      apt:
+        name: lsb-release
+        update_cache: yes
     - name: "Add apt key"
       apt_key:
         url: https://packages.microsoft.com/keys/microsoft.asc
+    - name: "Get \"lsb_release -cs\""
+      shell: "lsb_release -cs"
+      register: lsb_release
     - name: "Add repository"
       apt_repository:
-        repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main"
+        repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod {{ lsb_release.stdout }} main"
     - name: "Install powershell"
       apt:
         name: powershell-preview

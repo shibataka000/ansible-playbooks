@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   playbook:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     parameters:
       playbook:
         type: string
@@ -13,8 +13,8 @@ jobs:
           name: Install ansible
           command: |
             apt-get update
-            apt-get install python-pip -y
-            pip install ansible
+            apt-get install python3-pip -y
+            pip3 install ansible
       - run:
           name: Install ansible playbook
           command: |

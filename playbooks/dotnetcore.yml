@@ -17,7 +17,7 @@
         update_cache: yes
     - name: "Install .NET SDK"
       apt:
-        name: dotnet-sdk-2.1
+        name: dotnet-sdk-3.1
         update_cache: yes
     - name: "Make sure installed"
       shell: "dotnet --version"
