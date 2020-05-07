@@ -1,8 +1,0 @@
-- hosts: all
-  become: yes
-  tasks:
-    - name: "Install SAM CLI"
-      pip:
-        name: aws-sam-cli
-    - name: "Make sure installed"
-      shell: "sam --version"

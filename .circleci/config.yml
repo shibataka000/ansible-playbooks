@@ -29,9 +29,6 @@ workflows:
           name: golang
           playbook: golang
       - playbook:
-          name: sam
-          playbook: sam
-      - playbook:
           name: python
           playbook: python
       - playbook:
@@ -57,9 +54,6 @@ workflows:
       - playbook:
           name: golang
           playbook: golang
-      - playbook:
-          name: sam
-          playbook: sam
       - playbook:
           name: python
           playbook: python
