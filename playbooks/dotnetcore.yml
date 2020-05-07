@@ -1,5 +1,7 @@
 - hosts: all
   become: yes
+  vars:
+    dotnet_sdk_version: 3.1
   tasks:
     - name: "Install lsb-release"
       apt:
@@ -17,7 +19,7 @@
         update_cache: yes
     - name: "Install .NET SDK"
       apt:
-        name: dotnet-sdk-3.1
+        name: dotnet-sdk-{{ dotnet_sdk_version }}
         update_cache: yes
     - name: "Make sure installed"
       shell: "dotnet --version"
