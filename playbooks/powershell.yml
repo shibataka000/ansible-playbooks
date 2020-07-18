@@ -10,10 +10,13 @@
         url: https://packages.microsoft.com/keys/microsoft.asc
     - name: "Get \"lsb_release -cs\""
       shell: "lsb_release -cs"
-      register: lsb_release
+      register: lsb_release_c
+    - name: "Get \"lsb_release -rs\""
+      shell: "lsb_release -rs"
+      register: lsb_release_r
     - name: "Add repository"
       apt_repository:
-        repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod {{ lsb_release.stdout }} main"
+        repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/{{ lsb_release_r.stdout }}/prod {{ lsb_release_c.stdout }} main"
     - name: "Install powershell"
       apt:
         name: powershell-preview
