@@ -41,9 +41,6 @@ workflows:
           name: dotnetcore
           playbook: dotnetcore
       - playbook:
-          name: kubectx
-          playbook: kubectx
-      - playbook:
           name: awscli
           playbook: awscli
   nightly:
@@ -66,9 +63,6 @@ workflows:
       - playbook:
           name: dotnetcore
           playbook: dotnetcore
-      - playbook:
-          name: kubectx
-          playbook: kubectx
       - playbook:
           name: awscli
           playbook: awscli
