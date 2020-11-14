@@ -3,6 +3,15 @@
   vars:
     go_version: 1.15.4
   tasks:
+    - name: "Get stats of /usr/local/go"
+      stat:
+        path: /usr/local/go
+      register: s
+    - name: "Remove /usr/local/go"
+      file:
+        state: absent
+        path: /usr/local/go
+      when: s.stat.exists
     - name: "Download golang"
       get_url:
         url: https://storage.googleapis.com/golang/go{{ go_version }}.linux-amd64.tar.gz
