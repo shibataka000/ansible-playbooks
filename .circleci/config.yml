@@ -43,6 +43,11 @@ workflows:
       - playbook:
           name: awscli
           playbook: awscli
+      - playbook:
+          name: teleport
+          playbook: teleport
+          pre-steps:
+            - run: echo "export GOPATH=${HOME}/go" >> ${BASH_ENV}
   nightly:
     jobs:
       - playbook:
@@ -66,6 +71,11 @@ workflows:
       - playbook:
           name: awscli
           playbook: awscli
+      - playbook:
+          name: teleport
+          playbook: teleport
+          pre-steps:
+            - run: echo "export GOPATH=${HOME}/go" >> ${BASH_ENV}
     triggers:
       - schedule:
           cron: "0 0 * * 0"
