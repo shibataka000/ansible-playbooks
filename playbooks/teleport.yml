@@ -1,0 +1,34 @@
+- hosts: all
+  become: false
+  vars:
+    version: 8.0.1
+  tasks:
+    - name: "Download teleport.tar.gz"
+      get_url:
+        url: https://get.gravitational.com/teleport-v{{ version }}-linux-amd64-bin.tar.gz
+        dest: /tmp/teleport.tar.gz
+        force: yes
+    - name: "Unarchive teleport.tar.gz"
+      unarchive:
+        src: /tmp/teleport.tar.gz
+        dest: /tmp
+        remote_src: yes
+    - name: "Create a directory if it does not exist"
+      file:
+        path: "{{ lookup('env', 'GOPATH') }}/bin"
+        state: directory
+        mode: '0775'
+    - name: "Install tctl"
+      copy:
+        src: /tmp/teleport/tctl
+        dest: "{{ lookup('env', 'GOPATH') }}/bin/tctl"
+        mode: '0775'
+    - name: "Install tsh"
+      copy:
+        src: /tmp/teleport/tsh
+        dest: "{{ lookup('env', 'GOPATH') }}/bin/tsh"
+        mode: '0775'
+    - name: "Make sure tctl installed"
+      shell: "{{ lookup('env', 'GOPATH') }}/bin/tctl version"
+    - name: "Make sure tsh installed"
+      shell: "{{ lookup('env', 'GOPATH') }}/bin/tsh version"
