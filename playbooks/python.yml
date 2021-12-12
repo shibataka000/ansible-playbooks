@@ -1,7 +1,7 @@
 - hosts: all
   become: yes
   vars:
-    python_version: 3.8.2
+    version: 3.8.2
   tasks:
     - name: "Install gcc"
       apt:
@@ -23,26 +23,26 @@
       apt:
         name: zlib1g-dev
         update_cache: yes
-    - name: "Download Python-{{ python_version }}.tar.xz"
+    - name: "Download Python-{{ version }}.tar.xz"
       get_url:
-        url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tar.xz
-        dest: /tmp/Python-{{ python_version }}.tar.xz
+        url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
+        dest: /tmp/Python-{{ version }}.tar.xz
         force: yes
-    - name: "Unarchive Python-{{ python_version }}.tar.xz"
+    - name: "Unarchive Python-{{ version }}.tar.xz"
       unarchive:
-        src: /tmp/Python-{{ python_version }}.tar.xz
+        src: /tmp/Python-{{ version }}.tar.xz
         dest: /usr/local/src/
         remote_src: yes
     - name: "./configure"
       shell: ./configure
       args:
-        chdir: /usr/local/src/Python-{{ python_version }}
+        chdir: /usr/local/src/Python-{{ version }}
     - name: "make"
       make:
-        chdir: /usr/local/src/Python-{{ python_version }}
+        chdir: /usr/local/src/Python-{{ version }}
     - name: "make install"
       make:
-        chdir: /usr/local/src/Python-{{ python_version }}
+        chdir: /usr/local/src/Python-{{ version }}
         target: install
     - name: "Make sure installed"
       shell: "python3 --version"

@@ -1,7 +1,7 @@
 - hosts: all
   become: yes
   vars:
-    go_version: 1.16.5
+    version: 1.16.5
   tasks:
     - name: "Get stats of /usr/local/go"
       stat:
@@ -14,7 +14,7 @@
       when: s.stat.exists
     - name: "Download golang"
       get_url:
-        url: https://storage.googleapis.com/golang/go{{ go_version }}.linux-amd64.tar.gz
+        url: https://storage.googleapis.com/golang/go{{ version }}.linux-amd64.tar.gz
         dest: /tmp/golang.tar.gz
         force: yes
     - name: "Unarchive golang"
