@@ -17,7 +17,6 @@
       file:
         path: "{{ lookup('env', 'GOPATH') }}/bin"
         state: directory
-        mode: '0775'
     - name: "Install tctl"
       copy:
         src: /tmp/teleport/tctl
