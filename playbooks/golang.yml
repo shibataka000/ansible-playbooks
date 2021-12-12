@@ -6,12 +6,12 @@
     - name: "Get stats of /usr/local/go"
       stat:
         path: /usr/local/go
-      register: s
+      register: go
     - name: "Remove /usr/local/go"
       file:
         state: absent
         path: /usr/local/go
-      when: s.stat.exists
+      when: go.stat.exists
     - name: "Download golang"
       get_url:
         url: https://storage.googleapis.com/golang/go{{ version }}.linux-amd64.tar.gz
