@@ -1,0 +1,16 @@
+- hosts: all
+  become: false
+  vars:
+    version: latest
+  tasks:
+    - name: Make '$GOPATH/bin' directory if it does not exist
+      file:
+        path: "{{ lookup('env', 'GOPATH') }}/bin"
+        state: directory
+    - name: Install telepresence
+      get_url:
+        url: https://app.getambassador.io/download/tel2/linux/amd64/{{ version }}/telepresence
+        dest: "{{ lookup('env', 'GOPATH') }}/bin/telepresence"
+        mode: "0775"
+    - name: Make sure telepresence installed
+      shell: "{{ lookup('env', 'GOPATH') }}/bin/telepresence version"

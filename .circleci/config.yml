@@ -3,6 +3,8 @@ jobs:
   playbook:
     docker:
       - image: ubuntu:20.04
+    environment:
+      - GOPATH: /root/go
     parameters:
       playbook:
         type: string
@@ -43,6 +45,9 @@ workflows:
       - playbook:
           name: awscli
           playbook: awscli
+      - playbook:
+          name: telepresence
+          playbook: telepresence
   nightly:
     jobs:
       - playbook:
@@ -66,6 +71,9 @@ workflows:
       - playbook:
           name: awscli
           playbook: awscli
+      - playbook:
+          name: telepresence
+          playbook: telepresence
     triggers:
       - schedule:
           cron: "0 0 * * 0"
