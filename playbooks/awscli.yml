@@ -1,12 +1,22 @@
 - hosts: all
   become: yes
+  vars:
+    version: latest
   tasks:
     - name: "Install unzip"
       apt:
         name: unzip
+    - name: "Determine install version when version == \"latest\""
+      set_fact:
+        install_version: ""
+      when: version == "latest"
+    - name: "Determine install version when version != \"latest\""
+      set_fact:
+        install_version: "-{{ version }}"
+      when: version != "latest"
     - name: "Download awscli.zip"
       get_url:
-        url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+        url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64{{ install_version }}.zip"
         dest: /tmp/awscliv2.zip
         force: yes
     - name: "Unarchive awscli.zip"
@@ -14,15 +24,11 @@
         src: /tmp/awscliv2.zip
         dest: /tmp
         remote_src: yes
-    - name: "Check whether awscliv2 is already installed or not"
-      stat:
-        path: /usr/local/aws-cli/v2/current
-      register: sym
+    - name: "Remove /usr/local/aws-cli"
+      file:
+        path: /usr/local/aws-cli
+        state: absent
     - name: "Install awscliv2"
       shell: "sh /tmp/aws/install"
-      when: sym.stat.islnk is not defined
-    - name: "Update awscliv2"
-      shell: "sh /tmp/aws/install --update"
-      when: sym.stat.islnk is defined
     - name: "Make sure installed"
       shell: "aws --version"
