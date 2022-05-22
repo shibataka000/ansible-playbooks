@@ -17,15 +17,10 @@
       set_fact:
         install_version: "go{{ version }}"
       when: version != "latest"
-    - name: "Get stats of /usr/local/go"
-      stat:
-        path: /usr/local/go
-      register: go
     - name: "Remove /usr/local/go"
       file:
         state: absent
         path: /usr/local/go
-      when: go.stat.exists
     - name: "Download golang"
       get_url:
         url: https://go.dev/dl/{{ install_version }}.linux-amd64.tar.gz
