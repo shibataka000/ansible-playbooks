@@ -1,8 +1,22 @@
 - hosts: all
   become: yes
   vars:
-    version: 1.17.8
+    version: latest
   tasks:
+    - name: "Get latest golang version"
+      uri:
+        url: https://go.dev/VERSION?m=text
+        return_content: yes
+      register: latest_version
+      when: version == "latest"
+    - name: "Determine install version when version == \"latest\""
+      set_fact:
+        install_version: "{{ latest_version.content }}"
+      when: version == "latest"
+    - name: "Determine install version when version != \"latest\""
+      set_fact:
+        install_version: "go{{ version }}"
+      when: version != "latest"
     - name: "Get stats of /usr/local/go"
       stat:
         path: /usr/local/go
@@ -14,7 +28,7 @@
       when: go.stat.exists
     - name: "Download golang"
       get_url:
-        url: https://storage.googleapis.com/golang/go{{ version }}.linux-amd64.tar.gz
+        url: https://go.dev/dl/{{ install_version }}.linux-amd64.tar.gz
         dest: /tmp/golang.tar.gz
         force: yes
     - name: "Unarchive golang"
