@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   playbook:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     environment:
       - GOPATH: /root/go
     parameters:
