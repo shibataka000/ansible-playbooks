@@ -18,6 +18,11 @@
       apt:
         name: docker-ce
         update_cache: yes
+    - name: "Add user to docker group"
+      user:
+        name: "{{ ansible_env.SUDO_USER }}"
+        groups: docker
+        append: yes
     # Comment in following tasks when you run this playbook.
     # - name: "Start docker daemon"
     #   service:
