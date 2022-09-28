@@ -40,8 +40,8 @@ workflows:
           name: azurecli
           playbook: azurecli
       - playbook:
-          name: dotnetcore
-          playbook: dotnetcore
+          name: dotnet
+          playbook: dotnet
       - playbook:
           name: awscli
           playbook: awscli
@@ -66,8 +66,8 @@ workflows:
           name: azurecli
           playbook: azurecli
       - playbook:
-          name: dotnetcore
-          playbook: dotnetcore
+          name: dotnet
+          playbook: dotnet
       - playbook:
           name: awscli
           playbook: awscli
