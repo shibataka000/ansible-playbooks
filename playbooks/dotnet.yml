@@ -3,7 +3,7 @@
   tasks:
     - name: "Install .NET 6 SDK"
       apt:
-        name: dotnet-sdk-{{ version }}
+        name: dotnet6
         update_cache: yes
     - name: "Make sure installed"
       shell: "dotnet --version"
