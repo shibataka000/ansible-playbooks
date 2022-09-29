@@ -19,7 +19,7 @@
         repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/{{ lsb_release_r.stdout }}/prod {{ lsb_release_c.stdout }} main"
     - name: "Install powershell"
       apt:
-        name: powershell-preview
+        name: powershell
         update_cache: yes
     - name: "Make sure installed"
-      shell: "pwsh-preview --version"
+      shell: "pwsh --version"
