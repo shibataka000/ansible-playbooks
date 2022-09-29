@@ -31,9 +31,6 @@ workflows:
           name: golang
           playbook: golang
       - playbook:
-          name: python
-          playbook: python
-      - playbook:
           name: powershell
           playbook: powershell
       - playbook:
@@ -56,9 +53,6 @@ workflows:
       - playbook:
           name: golang
           playbook: golang
-      - playbook:
-          name: python
-          playbook: python
       - playbook:
           name: powershell
           playbook: powershell
