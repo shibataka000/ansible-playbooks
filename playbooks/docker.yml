@@ -8,12 +8,13 @@
     - name: "Add apt key"
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
+        keyring: /etc/apt/keyrings/docker.gpg
     - name: "Get \"lsb_release -cs\""
       shell: "lsb_release -cs"
       register: lsb_release
     - name: "Add repository"
       apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
+        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
     - name: "Install docker"
       apt:
         name: docker-ce
