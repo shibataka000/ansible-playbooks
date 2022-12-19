@@ -22,4 +22,4 @@ jobs:
       - name: Install ansible
         run: pip3 install ansible
       - name: Run playbook
-        run: ansible-playbook -i hosts playbooks/{{ matrix.playbook }}.yml
+        run: ansible-playbook -i hosts playbooks/${{ matrix.playbook }}.yml
