@@ -1,0 +1,29 @@
+name: Test
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * 0'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        playbook:
+          - awscli
+          - azurecli
+          - docker
+          - dotnet
+          - golang
+          - powershell
+          - telepresence
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install ansible
+        run: pip3 install ansible
+      - name: Run playbook
+        run: ansible-playbook -i hosts playbooks/${{ matrix.playbook }}.yml
+        env:
+          GOPATH: ${GITHUB_WORKSPACE}/go
