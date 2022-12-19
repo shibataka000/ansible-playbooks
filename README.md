@@ -1,6 +1,6 @@
 # Ansible Playbooks
 
-[![CircleCI](https://circleci.com/gh/shibataka000/ansible-playbooks.svg?style=shield)](https://circleci.com/gh/shibataka000/ansible-playbooks)
+[![Test](https://github.com/shibataka000/ansible-playbooks/actions/workflows/test.yaml/badge.svg)](https://github.com/shibataka000/ansible-playbooks/actions/workflows/test.yaml)
 
 Ansible playbooks to setup my development environment.
 
