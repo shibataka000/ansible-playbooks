@@ -23,3 +23,5 @@ jobs:
         run: pip3 install ansible
       - name: Run playbook
         run: ansible-playbook -i hosts playbooks/${{ matrix.playbook }}.yml
+        env:
+          GOPATH: ${GITHUB_WORKSPACE}/go
