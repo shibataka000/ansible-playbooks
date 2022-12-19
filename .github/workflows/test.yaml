@@ -1,0 +1,22 @@
+name: Test
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        playbook:
+          - awscli
+          - azurecli
+          - docker
+          - dotnet
+          - golang
+          - powershell
+          - telepresence
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Install ansible
+        run: pip3 install ansible
+      - name: Run playbook
+        run: ansible-playbook -i hosts playbooks/{{ matrix.playbook }}.yml
