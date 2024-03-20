@@ -11,7 +11,7 @@
       when: version == "latest"
     - name: "Determine install version when version == \"latest\""
       set_fact:
-        install_version: "{{ latest_version.content }}"
+        install_version: "{{ latest_version.content.split('\n')[0] }}"
       when: version == "latest"
     - name: "Determine install version when version != \"latest\""
       set_fact:
